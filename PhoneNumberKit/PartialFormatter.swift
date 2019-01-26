@@ -121,6 +121,12 @@ public final class PartialFormatter {
         if prefixBeforeNationalNumber.count > 0 {
             finalNumber.append(prefixBeforeNationalNumber)
         }
+        
+        // Added by Jeffrey to add space between 1 and area code in US/Canada numbers. This is a hack and should be removed if a future version corrects this issue more elegantly.
+        if prefixBeforeNationalNumber == "1" {
+            shouldAddSpaceAfterNationalPrefix = true
+        }
+        
         if shouldAddSpaceAfterNationalPrefix && prefixBeforeNationalNumber.count > 0 && prefixBeforeNationalNumber.last != PhoneNumberConstants.separatorBeforeNationalNumber.first  {
             finalNumber.append(PhoneNumberConstants.separatorBeforeNationalNumber)
         }
